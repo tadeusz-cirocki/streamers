@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+const API_BASE_URL = 'http://localhost:80';
+
 export const submitStreamer = async (streamerData) => {
   try {
-    const response = await axios.post('/streamers', streamerData);
+    const response = await axios.post(`${API_BASE_URL}/streamers`,
+        streamerData);
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -20,7 +23,7 @@ export const submitStreamer = async (streamerData) => {
 
 export const getStreamers = async () => {
   try {
-    const response = await axios.get('/streamers');
+    const response = await axios.get(`${API_BASE_URL}/streamers`);
     return response.data;
   } catch (error) {
     if (error.response) {
