@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const config = require('./config');
+
+/* Loading the environment variables from the .env file. */
+require('dotenv').config();
 
 /**
  * Connects to the MongoDB database.
@@ -8,7 +10,7 @@ const config = require('./config');
  */
 async function connectDB() {
   try {
-    await mongoose.connect(config.mongoURI, {
+    await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
