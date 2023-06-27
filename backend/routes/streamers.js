@@ -2,31 +2,52 @@ const express = require('express');
 const router = express.Router();
 const Streamer = require('../models/streamer');
 const {Types: {ObjectId}} = require('mongoose');
+const {body, validationResult} = require('express-validator');
 
 // POST /streamers - Handle new streamer submissions
-router.post('/', async (req, res) => {
-  try {
-    // Extract the submitted data from the request body
-    const {name, platform, description} = req.body;
+router.post(
+    '/',
+    [
+      body('name').notEmpty().withMessage('Name is required'),
+      body('platform').notEmpty().withMessage('Platform is required'),
+      body('description').notEmpty().withMessage('Description is required'),
+    ],
+    async (req, res) => {
+      try {
+      // Check for validation errors
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({errors: errors.array()});
+        }
 
-    // Create a new streamer record
-    const streamer = new Streamer({
-      name,
-      platform,
-      description,
-      upvotes: 0,
-      downvotes: 0,
-    });
+        // Extract the submitted data from the request body
+        const {name, platform, description} = req.body;
 
-    // Save the streamer record in the database
-    await streamer.save();
+        // Check if the streamer already exists
+        const existingStreamer = await Streamer.findOne({name, platform});
+        if (existingStreamer) {
+          return res.status(400).json({error: 'Streamer already exists'});
+        }
 
-    res.status(201).json(streamer);
-  } catch (error) {
-    console.error('Error creating streamer:', error);
-    res.status(500).json({error: 'Internal Server Error'});
-  }
-});
+        // Create a new streamer record
+        const streamer = new Streamer({
+          name,
+          platform,
+          description,
+          upvotes: 0,
+          downvotes: 0,
+        });
+
+        // Save the streamer record in the database
+        const savedStreamer = await streamer.save();
+
+        res.status(201).json(savedStreamer);
+      } catch (error) {
+        console.error('Error creating streamer:', error);
+        res.status(500).json({error: 'Internal Server Error'});
+      }
+    },
+);
 
 // GET /streamers - Retrieve all streamer submissions
 router.get('/', async (req, res) => {

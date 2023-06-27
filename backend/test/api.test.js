@@ -54,8 +54,7 @@ describe('POST /streamers', () => {
     expect(response.body.downvotes).to.equal(0);
   });
 
-  it('should return 500 if there is an error creating a streamer', async () => {
-    // Simulate an error by not sending the required data
+  it('should return 400 if the streamer data is invalid', async () => {
     const invalidStreamer = {};
 
     const response = await chai
@@ -63,8 +62,31 @@ describe('POST /streamers', () => {
         .post('/streamers')
         .send(invalidStreamer);
 
-    expect(response).to.have.status(500);
-    expect(response.body).to.have.property('error', 'Internal Server Error');
+    expect(response).to.have.status(400);
+    expect(response.body).to.have.property('errors').to.be.an('array');
+    expect(response.body.errors.length).to.equal(3);
+    expect(response.body.errors[0]).to.have.property('msg', 'Name is required');
+    expect(response.body.errors[1]).to.have.property('msg', 'Platform is required');
+    expect(response.body.errors[2]).to.have.property('msg', 'Description is required');
+  });
+
+  it('should return 400 if the streamer already exists', async () => {
+    const existingStreamer = {
+      name: 'Existing Streamer',
+      platform: 'Twitch',
+      description: 'This streamer already exists.',
+    };
+
+    // Save an existing streamer record to the database
+    await Streamer.create(existingStreamer);
+
+    const response = await chai
+        .request(app)
+        .post('/streamers')
+        .send(existingStreamer);
+
+    expect(response).to.have.status(400);
+    expect(response.body).to.have.property('error', 'Streamer already exists');
   });
 });
 
