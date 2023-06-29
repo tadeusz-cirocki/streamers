@@ -23,9 +23,8 @@
     color: #333;
     text-transform: uppercase;
     margin-bottom: 4rem;
-    margin-top: 2rem;
-    /* Add additional styles/effects as desired */
-  }  
+    margin-top: 2.5rem;
+}
 
 .form-container {
     display: flex;
@@ -53,4 +52,4 @@
     border: none;
     border-top: 1px solid #ccc;
     margin: 2rem 0;
-  }
+}
