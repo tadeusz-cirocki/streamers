@@ -9,6 +9,7 @@ import {
   Select,
   MenuItem,
 } from '@mui/material';
+import './StreamerForm.css';
 
 const StreamerForm = ({onSubmit, loading}) => {
   const [streamerData, setStreamerData] = useState({
@@ -30,9 +31,9 @@ const StreamerForm = ({onSubmit, loading}) => {
   };
 
   return (
-    <Box mt={2} display="flex" flexDirection="column" alignItems="center">
+    <Box className="streamer-form-container">
       <form onSubmit={handleSubmit}>
-        <Box mb={2} width={300}>
+        <Box className="streamer-form-field">
           <TextField
             name="name"
             label="Streamer's Name"
@@ -44,7 +45,7 @@ const StreamerForm = ({onSubmit, loading}) => {
           />
         </Box>
 
-        <Box mb={2} width={300}>
+        <Box className="streamer-form-field">
           <FormControl fullWidth required disabled={loading}>
             <InputLabel>Streaming Platform</InputLabel>
             <Select
@@ -61,7 +62,7 @@ const StreamerForm = ({onSubmit, loading}) => {
           </FormControl>
         </Box>
 
-        <Box mb={2} width={300}>
+        <Box className="streamer-form-field">
           <TextField
             name="description"
             label="Description"
@@ -75,14 +76,16 @@ const StreamerForm = ({onSubmit, loading}) => {
           />
         </Box>
 
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          disabled={loading}
-        >
-          {loading ? 'Submitting...' : 'Submit'}
-        </Button>
+        <Box className="streamer-form-button-container">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={loading}
+          >
+            {loading ? 'Submitting...' : 'Submit'}
+          </Button>
+        </Box>
       </form>
     </Box>
   );

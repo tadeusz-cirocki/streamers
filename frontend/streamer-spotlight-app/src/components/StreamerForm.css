@@ -1,0 +1,17 @@
+.streamer-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .streamer-form-field {
+    margin-bottom: 1rem;
+    width: 300px;
+  }
+  
+  .streamer-form-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
