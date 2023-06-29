@@ -44,6 +44,34 @@ const SubmissionPage = () => {
     }
   };
 
+  // Handle upvote and downvote
+  const handleVote = async (streamerId, voteType) => {
+    try {
+      const response = await apiService.submitVote(streamerId, voteType);
+      setStreamers((prevStreamers) =>
+        prevStreamers.map((streamer) =>
+          streamer._id === streamerId ?
+            {
+              ...streamer,
+              upvotes: response.upvotes,
+              downvotes: response.downvotes,
+            } :
+            streamer,
+        ),
+      );
+    } catch (error) {
+      setError('Error submitting vote');
+    }
+  };
+
+  const handleUpvote = (streamerId) => {
+    handleVote(streamerId, 'upvote');
+  };
+
+  const handleDownvote = (streamerId) => {
+    handleVote(streamerId, 'downvote');
+  };
+
   return (
     <div>
       <h1 className="streamer-spotlight-heading">Streamer Spotlight</h1>
@@ -65,10 +93,12 @@ const SubmissionPage = () => {
         </div>
       )}
 
-      <hr className='horizontal-line'/>
+      <hr className='horizontal-line' />
 
       <h2 className='streamer-list-heading'>Streamer List</h2>
-      {loading ? <p>Loading...</p> : <StreamerList streamers={streamers} />}
+      {loading ? <p>Loading...</p> :
+        <StreamerList streamers={streamers} onUpvote={handleUpvote} onDownvote={handleDownvote} />
+      }
     </div>
   );
 };
