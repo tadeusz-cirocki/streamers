@@ -17,7 +17,7 @@ const SubmissionPage = () => {
       try {
         setLoading(true);
         const response = await apiService.getStreamers();
-        setStreamers(response);
+        setStreamers(response.reverse()); // Reverse because we want the newly added first
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -33,7 +33,7 @@ const SubmissionPage = () => {
     try {
       setLoading(true);
       const response = await apiService.submitStreamer(streamerData);
-      setStreamers((prevStreamers) => [...(prevStreamers || []), response]);
+      setStreamers((prevStreamers) => [response, ...(prevStreamers || [])]);
       setLoading(false);
       setError('');
       setSuccessMessage('Streamer successfully added!');
