@@ -14,7 +14,7 @@ const SubmissionPage = () => {
       try {
         setLoading(true);
         const response = await apiService.getStreamers();
-        setStreamers(response.data);
+        setStreamers(response);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -30,7 +30,8 @@ const SubmissionPage = () => {
     try {
       setLoading(true);
       const response = await apiService.submitStreamer(streamerData);
-      setStreamers((prevStreamers) => [...prevStreamers, response.data]);
+      setStreamers((prevStreamers) => [...(prevStreamers || []),
+        response]);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -45,12 +46,9 @@ const SubmissionPage = () => {
       <h2>Add a Streamer</h2>
       <StreamerForm onSubmit={handleFormSubmit} loading={loading}
         error={error} />
-
       <h2>Streamer List</h2>
       {loading ? (
         <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
       ) : (
         <StreamerList streamers={streamers} />
       )}

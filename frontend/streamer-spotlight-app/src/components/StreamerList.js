@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  Divider,
-} from '@mui/material';
+import {List, ListItem, ListItemText, Divider} from '@mui/material';
 
 const StreamerList = ({streamers}) => {
+  if (!streamers) {
+    return null; // Optional: Render null if streamers is not yet available
+  }
+
+  if (streamers.length === 0) {
+    return null; // Optional: Render null if streamers array is empty
+  }
+
   return (
     <List>
       {streamers.map((streamer) => (
@@ -20,11 +22,6 @@ const StreamerList = ({streamers}) => {
           <Divider />
         </React.Fragment>
       ))}
-      {streamers.length === 0 && (
-        <Typography variant="body2" color="textSecondary">
-          No streamers found.
-        </Typography>
-      )}
     </List>
   );
 };
@@ -36,7 +33,7 @@ StreamerList.propTypes = {
         name: PropTypes.string.isRequired,
         platform: PropTypes.string.isRequired,
       }),
-  ).isRequired,
+  ),
 };
 
 export default StreamerList;
