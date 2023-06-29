@@ -1,0 +1,56 @@
+.message-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.streamer-spotlight-heading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+    /* Add additional styles/effects as desired */
+  }  
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.add-streamer-heading {
+    text-align: center;
+}
+
+.streamer-list-heading {
+    margin-top: 2rem;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.horizontal-line {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 2rem 0;
+  }

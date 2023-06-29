@@ -3,7 +3,7 @@ import StreamerForm from '../components/StreamerForm';
 import StreamerList from '../components/StreamerList';
 import apiService from '../services/apiService';
 import {Typography} from '@mui/material';
-import '../styles.css';
+import './SubmissionPage.css';
 
 const SubmissionPage = () => {
   const [streamers, setStreamers] = useState([]);
@@ -44,9 +44,9 @@ const SubmissionPage = () => {
 
   return (
     <div>
-      <h1>Streamer Spotlight</h1>
+      <h1 className="streamer-spotlight-heading">Streamer Spotlight</h1>
 
-      <h2>Add a Streamer</h2>
+      <h2 className="add-streamer-heading">Add a Streamer</h2>
       <StreamerForm onSubmit={handleFormSubmit} loading={loading} error={error} />
       {successMessage && (
         <div className="message-container">
@@ -55,7 +55,10 @@ const SubmissionPage = () => {
           </Typography>
         </div>
       )}
-      <h2>Streamer List</h2>
+
+      <hr className='horizontal-line'/>
+
+      <h2 className='streamer-list-heading'>Streamer List</h2>
       {loading ? <p>Loading...</p> : <StreamerList streamers={streamers} />}
     </div>
   );
