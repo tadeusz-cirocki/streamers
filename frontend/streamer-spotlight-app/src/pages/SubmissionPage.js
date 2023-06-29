@@ -35,9 +35,11 @@ const SubmissionPage = () => {
       const response = await apiService.submitStreamer(streamerData);
       setStreamers((prevStreamers) => [...(prevStreamers || []), response]);
       setLoading(false);
+      setError('');
       setSuccessMessage('Streamer successfully added!');
     } catch (error) {
       setLoading(false);
+      setSuccessMessage('');
       setError('Error adding streamer');
     }
   };
@@ -52,6 +54,13 @@ const SubmissionPage = () => {
         <div className="message-container">
           <Typography variant="body2" color="success" className="success-message">
             {successMessage}
+          </Typography>
+        </div>
+      )}
+      {error && (
+        <div className="message-container">
+          <Typography variant="body2" color="error" className="error-message">
+            {error}
           </Typography>
         </div>
       )}
