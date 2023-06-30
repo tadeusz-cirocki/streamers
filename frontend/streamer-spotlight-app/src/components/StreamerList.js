@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {List, ListItem, ListItemText, Divider, Button} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import './StreamerList.css';
 
 const StreamerList = ({streamers, onUpvote, onDownvote}) => {
   if (!streamers) {
@@ -23,6 +24,8 @@ const StreamerList = ({streamers, onUpvote, onDownvote}) => {
               startIcon={<AddIcon />}/>
             <Button size="small" onClick={() => onDownvote(streamer._id)}
               startIcon={<RemoveIcon />}/>
+            <span className="vote-count">+ {streamer.upvotes}</span>
+            <span className="vote-count">- {streamer.downvotes}</span>
           </ListItem>
           <Divider />
         </React.Fragment>
