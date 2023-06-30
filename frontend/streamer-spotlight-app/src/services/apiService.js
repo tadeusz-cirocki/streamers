@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:80';
+const API_BASE_URL = 'http://localhost:80'; // todo get from backend config
 
 const apiService = {
   submitStreamer: async (streamerData) => {
@@ -45,6 +45,24 @@ const apiService = {
       return response.data;
     } catch (error) {
       throw new Error('Failed to submit vote');
+    }
+  },
+
+  getStreamerById: async (streamerId) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/streamers/${streamerId}`);
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        // Request was made and server responded with a non-2xx status code
+        throw new Error(error.response.data.error);
+      } else if (error.request) {
+        // Request was made but no response received
+        throw new Error('No response from the server');
+      } else {
+        // Something else happened while setting up the request
+        throw new Error('Failed to fetch streamer');
+      }
     }
   },
 };
