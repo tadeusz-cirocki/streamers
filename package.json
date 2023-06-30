@@ -4,7 +4,8 @@
   "description": "run locally:\r create .env file, add PORT and MONGODB_URI variables\r npm start",
   "main": "index.js",
   "scripts": {
-    "start": "cd backend && npm start"
+    "start:server": "cd backend && npm start",
+    "start:client": "cd frontend && npm start"
   },
   "repository": {
     "type": "git",
@@ -15,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/tadeusz-cirocki/streamers/issues"
   },
-  "homepage": "https://github.com/tadeusz-cirocki/streamers#readme",
-  "devDependencies": {
-    "concurrently": "^8.2.0"
-  }
+  "homepage": "https://github.com/tadeusz-cirocki/streamers#readme"
 }
