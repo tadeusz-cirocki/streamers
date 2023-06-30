@@ -23,7 +23,7 @@
     color: #333;
     text-transform: uppercase;
     margin-bottom: 4rem;
-    margin-top: 2.5rem;
+    margin-top: 3rem;
 }
 
 .form-container {
@@ -47,5 +47,5 @@
 .horizontal-line {
     border: none;
     border-top: 1px solid #ccc;
-    margin: 2rem 0;
+    margin: 2rem 0 0.5rem;
 }

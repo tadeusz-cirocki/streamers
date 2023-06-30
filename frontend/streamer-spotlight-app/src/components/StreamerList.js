@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {List, ListItem, ListItemText, Divider, Button} from '@mui/material';
+import {List, ListItem, ListItemText, Divider, Button, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import './StreamerList.css';
+import {Link} from 'react-router-dom';
 
 const StreamerList = ({streamers, onUpvote, onDownvote}) => {
   if (!streamers) {
@@ -19,7 +20,14 @@ const StreamerList = ({streamers, onUpvote, onDownvote}) => {
       {streamers.map((streamer) => (
         <React.Fragment key={streamer._id}>
           <ListItem>
-            <ListItemText primary={streamer.name} secondary={streamer.platform} />
+            <ListItemText
+              primary={
+                <Typography variant="body1" component={Link}
+                  to={`/streamer/${streamer._id}`} className="streamer-link">
+                  {streamer.name}
+                </Typography>
+              }
+              secondary={streamer.platform} />
             <Button size="small" onClick={() => onUpvote(streamer._id)}
               startIcon={<AddIcon />}/>
             <Button size="small" onClick={() => onDownvote(streamer._id)}

@@ -21,6 +21,7 @@ module.exports = {
       'error',
       {
         'code': 100,
+        'ignoreUrls': true,
       },
     ],
   },
