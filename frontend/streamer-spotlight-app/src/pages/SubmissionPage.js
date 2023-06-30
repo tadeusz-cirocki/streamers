@@ -95,7 +95,6 @@ const SubmissionPage = () => {
 
       <hr className='horizontal-line' />
 
-      <h2 className='streamer-list-heading'>Streamer List</h2>
       {loading ? <p>Loading...</p> :
         <StreamerList streamers={streamers} onUpvote={handleUpvote} onDownvote={handleDownvote} />
       }
