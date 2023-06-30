@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:80'; // todo get from backend config
+const API_BASE_URL = process.env.SERVER_URL || 'http://localhost:80';
 
 const apiService = {
   submitStreamer: async (streamerData) => {
