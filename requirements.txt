@@ -1,0 +1,31 @@
+Your task is to create a simple streamer spotlight application. In this application, users can add their favorite streamers along with some relevant details. Other users can then upvote or downvote these streamers. Each user's submission and the current number of upvotes/downvotes should be stored on a backend and updated/displayed on the frontend.
+Technologies available:
+- React.js
+- Node.js
+- Express/nest.js
+- Database of choice (preferably something lightweight for ease of testing)
+- ORM of choice (if used)
+
+Frontend:
+
+Page 1:
+
+Streamer Submission Form: This form should contain fields for the streamer's name, streaming platform dropdown (Twitch/YouTube/TikTok/Kick/Rumble) and their description.
+
+Streamer List: This should display a list of all streamers that have been submitted, along with their number of upvotes/downvotes. This list should update in real-time as new streamers are added and upvotes are cast.
+
+Page 2:
+
+Streamer record: This is a page with details of a single streamer record - name, description, platform, and image - this image should just be a static image (like for example https://static-cdn.jtvnw.net/jtv_user_pictures/asmongold-profile_image-f7ddcbd0332f5d28-300x300.png). We don't want to add fully working image upload feature as it would complicate this task too much and without image this page would be too empty.
+
+Backend:
+
+POST /streamers: An endpoint to receive new streamer submissions from the frontend and store them in a database.
+
+GET /streamers: An endpoint to return all the stored streamer submissions in response to a request from the frontend.
+
+GET /streamer/[streamerId]: An endpoint to return data about a specific streamer.
+
+PUT /streamers/[streamerId]/vote: An endpoint to receive an upvote for a specific streamer and update their current upvote/downvote count.
+
+Please use any lightweight database technology of your choice, preferably SQLite or MongoDB for ease of testing (though other options are also possible if you don't know above).
